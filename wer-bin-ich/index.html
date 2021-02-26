@@ -47,7 +47,7 @@
 					let input_lobby_id = document.querySelector(`input[name="input_lobby_id"]`).value;
 					let input_user_name = document.querySelector(`input[name="input_user"]`).value;
 					console.log(`clicked on btn_create, value of input_lobby_id was ${input_lobby_id}`);
-					axios.put("https://api.unnormal-belohnend.de/wai/v1/",{title: "test",playerName: input_user_name},(response) => {
+					axios.put("https://api.unnormal-belohnend.de/wai/v1/",{ params: {title: "test",playerName: input_user_name}},(response) => {
 						console.log(response.data);
 						console.log(response.data.code);
 					});
