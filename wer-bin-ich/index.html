@@ -1,38 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Who am I</title>
-	<link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<h1> Who am I?</h1>
-	<div>
-		<p>
-			Who are you?
-		</p>
-		<input name="input_user">
-		</input>	
-	</div>
-	<div>
-		<p>
-			Insert lobby code to enter a lobby
-		</p>
-		<input name="input_lobby_id">
-		</input>	
-		<p>
-		<button name="btn_join">
-			Join
-		</button>
-		</p>
-		<p>
-			or create a
-		</p>
-		<button name="btn_create">
-			New Game
-		</button>	
-	</div>
-	<div style="background-color:transparent;color:gray;" >
-		<p>by Mr. Incredible and LuluHexe</p>
-	</div>	
-</body>
+	<head>
+		<title>Who am I</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<h1> Who am I?</h1>
+		<div>
+			<p>
+				Who are you?
+			</p>
+			<input name="input_user" />
+		</div>
+		<div>
+			<p>
+				Insert lobby code to enter a lobby
+			</p>
+			<input name="input_lobby_id" />
+			<p>
+				<button name="btn_join">
+					Join
+				</button>
+			</p>
+			<p>
+				or create a
+			</p>
+			<button name="btn_create">
+				New Game
+			</button>
+		</div>
+		<div style="background-color:transparent;color:gray;">
+			<p>by Mr. Incredible and LuluHexe</p>
+		</div>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function (event) {
+				axios.get("https://api.unnormal-belohnend.de/").then((response) => {
+					if (response.data === "pong") {
+						console.log("Server is online");
+					} else {
+						console.error("Server is offline");
+					}
+				});
+
+				document.querySelector(`button[name="btn_create"]`).addEventListener("click", function () {
+					let input_lobby_id = document.querySelector(`input[name="input_lobby_id"]`).value;
+					let input_user_name = document.querySelector(`input[name="input_user"]`).value;
+					console.log(`clicked on btn_create, value of input_lobby_id was ${input_lobby_id}`);
+					axios.put("https://api.unnormal-belohnend.de/wai/v1/",{title: "test",playerName: input_user_name},(response) => {
+						console.log(response.data);
+						console.log(response.data.code);
+					});
+				})
+			});
+		</script>
+	</body>
 </html>
